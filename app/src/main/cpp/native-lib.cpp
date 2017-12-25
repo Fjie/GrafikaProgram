@@ -3,7 +3,7 @@
 #include <string>
 #include <android/log.h>
 
-#include <GLES2/gl2.h>
+#include <GLES3/gl3.h>
 #include <GLES2/gl2ext.h>
 
 
@@ -21,14 +21,15 @@ static void printGLString(const char *name, GLenum s) {
     LOGI("GL %s = %s\n", name, v);
 }
 
-static void checkGlError(const char *op) {
+static bool checkGlError(const char *op) {
     for (GLint error = glGetError(); error; error
                                                     = glGetError()) {
         LOGI("after %s() glError (0x%x)\n", op, error);
     }
+    return false;
 }
 
-auto gVertexShader =
+char gVertexShader[] =
         "attribute vec4 vPosition;\n"
                 "uniform mat4 uMVPMatrix;\n"
                 "void main() {\n"
@@ -36,7 +37,7 @@ auto gVertexShader =
 //                "   gl_Position = vPosition;\n"
                 "}\n";
 
-auto gFragmentShader =
+char gFragmentShader[] =
         "precision mediump float;\n"
                 "void main() {\n"
                 "  gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);\n"
@@ -69,7 +70,7 @@ GLuint loadShader(GLenum shaderType, const char *pSource) {
 }
 
 // 创建一个编程管线
-GLuint createProgram(const char *pVertexSource, const char *pFragmentSource) {
+GLuint createProgram2(const char *pVertexSource, const char *pFragmentSource) {
     GLuint vertexShader = loadShader(GL_VERTEX_SHADER, pVertexSource);
     if (!vertexShader) {
         return 0;
@@ -125,7 +126,7 @@ bool setupGraphics(int w, int h) {
     printGLString("Extensions", GL_EXTENSIONS);
 
     LOGI("setupGraphics(%d, %d)", w, h);
-    gProgram = createProgram(gVertexShader, gFragmentShader);
+    gProgram = createProgram2(gVertexShader, gFragmentShader);
     if (!gProgram) {
         LOGE("Could not create program.");
         return false;
@@ -169,7 +170,7 @@ void renderFrame(JNIEnv *pEnv, jobject pJobject) {
 
     /* ------------------搞创作--------------------- */
 
-    int absIndex = mStep * 1000;
+    int absIndex = (int) (mStep * 1000);
     int xpos = absIndex * width / 120;
     int ypos = absIndex * height / 120;
 
@@ -198,7 +199,7 @@ void renderFrame(JNIEnv *pEnv, jobject pJobject) {
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     checkGlError("glDrawArrays");
 
-    jclass mClazz = pEnv->GetObjectClass(pJobject);
+//    jclass mClazz = pEnv->GetObjectClass(pJobject);
 //    jmethodID mMethod = pEnv -> GetMethodID(mClazz,"showMsg","()");
 //    pEnv->CallVoidMethod(mClazz, mMethod);
 }
@@ -226,12 +227,11 @@ Java_me_fanjie_grafikaprogram_pages_glesndk_GL2JNILib_step(JNIEnv *env, jobject 
 extern "C"
 JNIEXPORT void JNICALL
 Java_me_fanjie_grafikaprogram_pages_glesndk_GL2JNILib_test(JNIEnv *env, jclass type) {
-    long n;
+    long n = 0;
     for (int i = 0; i < 100000; ++i) {
         for (int i2 = 0; i < 100000; ++i) {
             n += i + i2;
         }
     }
-    LOGI("n = %d",n);
 
 }

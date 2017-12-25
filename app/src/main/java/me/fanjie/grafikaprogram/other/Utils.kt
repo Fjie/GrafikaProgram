@@ -9,6 +9,13 @@ val TAG = "MY_TAG"
 val VERBOSE = true
 
 
+fun doAndComputeTime(name: String = "xxx", mMethod: () -> Unit) {
+    val cm = System.currentTimeMillis()
+    mMethod.invoke()
+    Log.e(name, "time = ${System.currentTimeMillis() - cm} ms")
+}
+
+
 /**
  * Selects the video track, if any.
  *

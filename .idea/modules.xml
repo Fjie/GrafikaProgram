@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GrafikaProgram.iml" filepath="$PROJECT_DIR$/GrafikaProgram.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/csffmpeg/csffmpeg.iml" filepath="$PROJECT_DIR$/csffmpeg/csffmpeg.iml" />
     </modules>
   </component>
 </project>

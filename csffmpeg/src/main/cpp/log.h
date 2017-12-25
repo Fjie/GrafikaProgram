@@ -1,0 +1,19 @@
+//
+// Created by zhangxin on 2016-4-6.
+//
+
+#ifndef PHOENIX_LOG_H
+#define PHOENIX_LOG_H
+
+#include <android/log.h>
+
+#define TAG "屮艸芔茻"
+
+#define LOGV(...)    __android_log_print(ANDROID_LOG_VERBOSE, TAG, __VA_ARGS__)
+#define LOGD(...)    __android_log_print(ANDROID_LOG_DEBUG, TAG, __VA_ARGS__)
+#define LOGI(...)    __android_log_print(ANDROID_LOG_INFO, TAG, __VA_ARGS__)
+#define LOGW(...)    __android_log_print(ANDROID_LOG_WARN, TAG, __VA_ARGS__)
+#define LOGE(...)    __android_log_print(ANDROID_LOG_ERROR, TAG, __VA_ARGS__)
+#define LOGF(...)    __android_log_print(ANDROID_LOG_FATAL, TAG, __VA_ARGS__)
+
+#endif //PHOENIX_LOG_H

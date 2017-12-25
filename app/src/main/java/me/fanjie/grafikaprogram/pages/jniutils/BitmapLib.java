@@ -9,7 +9,7 @@ import android.graphics.Bitmap;
 public class BitmapLib {
 
     static {
-        System.loadLibrary("native-bitmap-lib");
+        System.loadLibrary("native-lib");
     }
 
     public static native void blurBitmap(Bitmap bitmap, int r);

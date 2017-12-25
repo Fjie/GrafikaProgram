@@ -39,21 +39,16 @@ class GL2JNIActivity : Activity() {
     override fun onResume() {
         super.onResume()
         mJNIView?.onResume()
-//        compuTime("JNI", {
+//        doAndComputeTime("JNI", {
 //            GL2JNILib.test()
 //        })
-//        compuTime("Java", {
+//        doAndComputeTime("Java", {
 //            test()
 //        })
 
     }
 
 
-    private fun compuTime(name: String, mMethod: () -> Unit) {
-        val cm = System.currentTimeMillis()
-        mMethod.invoke()
-        Log.e(name, "time = ${System.currentTimeMillis() - cm} ms")
-    }
 
     private fun test() {
         var n = 0
