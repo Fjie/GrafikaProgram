@@ -50,8 +50,8 @@ static const char FRAGMENT_SHADER[] =
     "}\n";
 
 class RendererES3: public Renderer {
-    // 介tm是构造器吧？
 public:
+    // 构造器
     RendererES3();
     virtual ~RendererES3();
     bool init();
