@@ -1,1 +1,1 @@
-include ':app', ':csffmpeg'
+include ':app', ':csffmpeg', ':testvireo'
